@@ -83,27 +83,37 @@ export default function Page() {
 
           <div className="hidden md:flex flex-wrap gap-2 items-center w-full md:w-auto justify-end">
             {/* TOMBOL MINI MODE (POPUP SLIM) */}
-            <Button
-              variant="outline"
-              className="gap-2 border-slate-200 text-slate-600 hover:text-blue-600 hover:border-blue-200"
+            <button
+              type="button"
+              className="inline-flex items-center justify-center gap-2 border border-slate-200 bg-transparent text-slate-600 hover:text-blue-600 hover:border-blue-200 px-4 py-2 rounded-md text-sm font-medium transition-colors"
               onClick={() => {
-                const w = 320;
-                const h = 480;
-                const left = (window.screen.width - w) / 2;
-                const top = (window.screen.height - h) / 2;
-                const popup = window.open(
-                  window.location.origin + "/mini",
-                  "MiniPricelist",
-                  `width=${w},height=${h},top=${top},left=${left},resizable=yes,scrollbars=yes,status=yes`
-                );
-                if (popup) {
-                  popup.focus();
+                try {
+                  const w = 320;
+                  const h = 480;
+                  const left = (window.screen.width - w) / 2;
+                  const top = (window.screen.height - h) / 2;
+                  const url = window.location.origin + "/mini";
+                  
+                  const popup = window.open(
+                    url,
+                    "MiniWindowVercel",
+                    `width=${w},height=${h},top=${top},left=${left},resizable=yes,scrollbars=yes,status=yes`
+                  );
+                  
+                  if (popup) {
+                    popup.focus();
+                  } else {
+                    alert("Browser tetap memblokir popup. Mengalihkan ke halaman biasa...");
+                    window.location.href = url;
+                  }
+                } catch (err) {
+                  alert("Terjadi error Javascript: " + err);
                 }
               }}
             >
               <MonitorPlay className="h-4 w-4" />
               Mini Mode
-            </Button>
+            </button>
 
             <div className="h-6 w-px bg-slate-200 mx-1"></div>
 
