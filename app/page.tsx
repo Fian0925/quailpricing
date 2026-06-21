@@ -87,11 +87,16 @@ export default function Page() {
               variant="outline"
               className="gap-2 border-slate-200 text-slate-600 hover:text-blue-600 hover:border-blue-200"
               onClick={() => {
-                window.open(
+                const popup = window.open(
                   "/mini",
                   "MiniPricelist",
-                  "width=320,height=480,resizable=yes,scrollbars=yes,status=yes",
+                  "width=320,height=480,resizable=yes,scrollbars=yes,status=yes"
                 );
+                // Jika diblokir oleh browser atau di HP, popup akan bernilai null
+                if (!popup || popup.closed || typeof popup.closed == 'undefined') {
+                  // Fallback: Buka di tab baru biasa
+                  window.open("/mini", "_blank");
+                }
               }}
             >
               <MonitorPlay className="h-4 w-4" />
