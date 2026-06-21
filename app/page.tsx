@@ -87,11 +87,18 @@ export default function Page() {
               variant="outline"
               className="gap-2 border-slate-200 text-slate-600 hover:text-blue-600 hover:border-blue-200"
               onClick={() => {
-                window.open(
-                  "/mini",
+                const w = 320;
+                const h = 480;
+                const left = (window.screen.width - w) / 2;
+                const top = (window.screen.height - h) / 2;
+                const popup = window.open(
+                  window.location.origin + "/mini",
                   "MiniPricelist",
-                  "width=320,height=480,resizable=yes,scrollbars=yes,status=yes"
+                  `width=${w},height=${h},top=${top},left=${left},resizable=yes,scrollbars=yes,status=yes`
                 );
+                if (popup) {
+                  popup.focus();
+                }
               }}
             >
               <MonitorPlay className="h-4 w-4" />
