@@ -86,21 +86,26 @@ export default function Page() {
             <Button
               variant="outline"
               className="gap-2 border-slate-200 text-slate-600 hover:text-blue-600 hover:border-blue-200"
-              onClick={() => {
-                const popup = window.open(
-                  "/mini",
-                  "MiniPricelist",
-                  "width=320,height=480,resizable=yes,scrollbars=yes,status=yes"
-                );
-                // Jika diblokir oleh browser atau di HP, popup akan bernilai null
-                if (!popup || popup.closed || typeof popup.closed == 'undefined') {
-                  // Fallback: Buka di tab baru biasa
-                  window.open("/mini", "_blank");
-                }
-              }}
+              asChild
             >
-              <MonitorPlay className="h-4 w-4" />
-              Mini Mode
+              <a
+                href="/mini"
+                target="_blank"
+                rel="noopener noreferrer"
+                onClick={(e) => {
+                  const popup = window.open(
+                    "/mini",
+                    "MiniPricelist",
+                    "width=320,height=480,resizable=yes,scrollbars=yes,status=yes"
+                  );
+                  if (popup && !popup.closed && typeof popup.closed !== 'undefined') {
+                    e.preventDefault();
+                  }
+                }}
+              >
+                <MonitorPlay className="h-4 w-4" />
+                Mini Mode
+              </a>
             </Button>
 
             <div className="h-6 w-px bg-slate-200 mx-1"></div>
